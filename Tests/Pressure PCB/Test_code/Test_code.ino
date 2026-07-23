@@ -10,13 +10,21 @@ void setup() {
 
   digitalWrite(outputPin1, HIGH);
   digitalWrite(outputPin2, HIGH);
+
+  analogReadResolution(10);  // 10-bit ADC (0-1023)
 }
 
 void loop() {
   int analogValue = analogRead(analogPin);
 
-  Serial.print("Analog value: ");
-  Serial.println(analogValue);
+  // Assuming a 3.3V reference
+  float voltage = analogValue * (3.3 / 1023.0);
+
+  Serial.print("ADC: ");
+  Serial.print(analogValue);
+  Serial.print("   Voltage: ");
+  Serial.print(voltage, 3);  // Print with 3 decimal places
+  Serial.println(" V");
 
   delay(1000);
 }
